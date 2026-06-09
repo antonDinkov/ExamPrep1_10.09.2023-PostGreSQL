@@ -7,7 +7,7 @@ SELECT
 FROM drivers AS d
 JOIN cars_drivers AS cd
 ON d.id = cd.driver_id
-JOIN CARS as c
+JOIN cars AS c
 ON c.id = cd.car_id
 WHERE c.mileage IS NOT NULL
 ORDER BY c.mileage DESC, d.first_name
