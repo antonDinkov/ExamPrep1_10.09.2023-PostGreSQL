@@ -6,3 +6,13 @@ WHERE
 		FROM courses
 		)
 ;
+
+-- или
+
+DELETE FROM clients AS cl
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM courses AS c
+    WHERE c.client_id = cl.id
+)
+AND LENGTH(cl.full_name) > 3;
