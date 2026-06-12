@@ -15,3 +15,23 @@ FROM customers
 UPDATE gift_recipients
 SET gift_sent = TRUE
 WHERE country_id IN (7, 8, 14, 17, 26);
+
+-- или
+
+CREATE TABLE gift_recipients (
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	name VARCHAR (76),
+	country_id INT,
+	gift_sent BOOL DEFAULT false
+);
+
+INSERT INTO gift_recipients(name, country_id, gift_sent)
+SELECT
+	first_name || ' ' || last_name,
+	country_id,
+	CASE
+    	WHEN country_id IN (7, 8, 14, 17, 26) THEN true
+    ELSE false
+END
+FROM customers
+;
